@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Composite
+{% endblock %}
+
+{% block content %}
+{% include 'included.html' %}
+{% include 'included_with_vars.html' %}
+<h2>This is a composite template, which includes another one</h2>
+<p>Var 1 is {{ var1 }}</p>
+{% endblock %}

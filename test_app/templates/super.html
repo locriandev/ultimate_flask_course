@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Child 1
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<h2>Child template content</h2>
+{% endblock %}
