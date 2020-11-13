@@ -11,7 +11,7 @@ def init(app):
     @app.route('/form')
     def _form():
         return render_template(
-            'form.html',
+            FORM_TEMPLATE,
             action="/processForm"
         )
 
@@ -27,7 +27,7 @@ def init(app):
     @app.route('/form2', methods=['GET', 'POST'])
     def _form2():
         if request.method == 'GET':
-            return render_template('form.html', action="/form2")
+            return render_template(FORM_TEMPLATE, action="/form2")
         return jsonify(str(request.form))
 
     @app.route('/form3', methods=['GET', 'POST'])
