@@ -1,4 +1,7 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, url_for
+from werkzeug.utils import redirect
+
+from database import get_db
 
 
 FORM_TEMPLATE = 'form.html'
@@ -14,7 +17,12 @@ def init(app):
 
     @app.route('/processForm', methods=['POST'])
     def process_form():
-        return str(request.form)
+        name = request.form['name']
+        location = request.form['location']
+        db = get_db()
+        db.execute(f'insert into users (name, location) values ("{name}", "{location}")')
+        db.commit()
+        return f'Added user: {name} from {location}'
 
     @app.route('/form2', methods=['GET', 'POST'])
     def form2():
