@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = 'A!A%371z$IV*'
 
 forms.init(app)
 templates.init(app)
-request.init(app)
+request.init(app)  # pylint: disable=no-member
 session.init(app)
 inheritance.init(app)
 static.init(app)

@@ -8,24 +8,26 @@ DB_ATTRIB_NAME = 'sqlite_db'
 
 def init(app: Flask):
     @app.teardown_appcontext
-    def close_db(error):
+    def _close_db(error):
         if hasattr(g, DB_ATTRIB_NAME):
             get_db().close()
+        if error:
+            print(error)
 
     @app.route('/viewResults')
-    def view_results():
-        db = get_db()
-        cur = db.execute('select * from users')
-        res = cur.fetchall()
-        for r in res:
-            print(f'{r["id"]} - {r["name"]} - {r["location"]}')
-        return render_template('database.html', results=res)
+    def _view_results():
+        database = get_db()
+        cursor = database.execute('select * from users')
+        results = cursor.fetchall()
+        for result in results:
+            print(f'{result["id"]} - {result["name"]} - {result["location"]}')
+        return render_template('database.html', results=results)
 
 
 def connect_db():
-    db = sqlite3.connect(DB_NAME)
-    db.row_factory = sqlite3.Row
-    return db
+    database = sqlite3.connect(DB_NAME)
+    database.row_factory = sqlite3.Row
+    return database
 
 
 def get_db():

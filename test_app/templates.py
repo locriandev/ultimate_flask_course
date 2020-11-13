@@ -3,15 +3,15 @@ from flask import render_template
 
 def init(app):
     @app.route('/bool/<value>')
-    def boolean(value):
+    def _boolean(value):
         return render_template('if.html', val=value == 'True')
 
     @app.route('/list2/<int:n>')
-    def list2(n):
+    def _list2(n):  # pylint: disable=invalid-name
         return render_template('list.html', n=n)
 
     @app.route('/listOfDicts')
-    def list_of_dicts():
+    def _list_of_dicts():
         l_of_d = [
             {'key': 'value 1'},
             {'key': 'value 2'},
