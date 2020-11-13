@@ -9,6 +9,7 @@ import session
 import inheritance
 import static
 import various
+import database
 
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ session.init(app)
 inheritance.init(app)
 static.init(app)
 various.init(app)
+database.init(app)
 
 
 if __name__ == '__main__':
