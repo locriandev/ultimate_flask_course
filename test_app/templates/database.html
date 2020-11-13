@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+    <meta charset="UTF-8">
+    <title>Database</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Location</th>
+    </tr>
+    {% for row in results %}
+    <tr>
+        <td>{{ row['id'] }}</td>
+        <td>{{ row['name'] }}</td>
+        <td>{{ row['location'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>
