@@ -4,18 +4,18 @@ from flask import Flask
 
 from modules import database, templates, static, various, session, request, forms, inheritance
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'A!A%371z$IV*'
+APP = Flask(__name__)
+APP.config['SECRET_KEY'] = 'A!A%371z$IV*'
 
-forms.init(app)
-templates.init(app)
-request.init(app)  # pylint: disable=no-member
-session.init(app)
-inheritance.init(app)
-static.init(app)
-various.init(app)
-database.init(app)
+forms.init(APP)
+templates.init(APP)
+request.init(APP)  # pylint: disable=no-member
+session.init(APP)
+inheritance.init(APP)
+static.init(APP)
+various.init(APP)
+database.init(APP)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    APP.run(debug=True)
