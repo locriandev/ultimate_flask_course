@@ -1,9 +1,10 @@
 from flask import Flask, render_template
 
-from modules import database
+from modules import database, food
 
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = 'JtiPWt7jC3K3'
+food.init(APP)
 database.init(APP)
 
 
@@ -15,11 +16,6 @@ def index():
 @APP.route('/view')
 def view():
     return render_template('day.html')
-
-
-@APP.route('/food')
-def food():
-    return render_template('add_food.html')
 
 
 if __name__ == '__main__':
