@@ -6,12 +6,12 @@ def init(app: Flask):
     @app.route('/food', methods=['GET', 'POST'])
     def _food():
         if request.method == 'POST':
-            handle(request.form)
+            handle_new_food(request.form)
             return redirect(url_for('_food'))
-        return render_template('add_food.html')
+        return render_template('add_food.html', food=get_food())
 
 
-def handle(form):
+def handle_new_food(form):
     food = {
         'name': form['food'],
         'protein': int(form['protein']),
@@ -36,3 +36,9 @@ def add_food_to_db(food):
          food["fat"], food["calories"]]
     )
     food_db.commit()
+
+
+def get_food():
+    food_db = database.get_db()
+    cursor = food_db.execute('select * from food')
+    return cursor.fetchall()
