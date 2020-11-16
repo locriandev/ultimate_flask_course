@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 
+from modules import database
 
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = 'JtiPWt7jC3K3'
+database.init(APP)
 
 
 @APP.route('/')
