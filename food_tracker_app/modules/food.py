@@ -6,8 +6,12 @@ def init(app: Flask):
     @app.route('/food', methods=['GET', 'POST'])
     def _food():
         if request.method == 'POST':
-            handle_new_food(request.form)
+            if 'add' in request.form:
+                handle_new_food(request.form)
+            else:
+                delete_food(request.form)
             return redirect(url_for('_food'))
+
         return render_template('add_food.html', food=get_food())
 
 
@@ -42,3 +46,10 @@ def get_food():
     food_db = database.get_db()
     cursor = food_db.execute('select * from food')
     return cursor.fetchall()
+
+
+def delete_food(form):
+    name = form['delete']
+    food_db = database.get_db()
+    food_db.execute(f'delete from food where name="{name}"')
+    food_db.commit()

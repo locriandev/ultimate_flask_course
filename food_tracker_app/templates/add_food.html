@@ -60,6 +60,9 @@
                   <label for="fat">Fat</label>
                   <input type="number" name="fat" class="form-control" id="fat" placeholder="Fat">
                 </div>
+                <div class="form-group">
+                  <input type="hidden" name="add" class="form-control">
+                </div>
                 <button type="submit" class="btn btn-primary">Add</button>
               </form>
 
@@ -72,6 +75,11 @@
                 <li><a>Carbohydrates: <span class="badge">{{ food_element["carbohydrates"] }}</span></a></li>
                 <li><a>Fat: <span class="badge">{{ food_element["fats"] }}</span></a></li>
                 <li><a>Calories: <span class="badge">{{ food_element["calories"] }}</span></a></li>
+
+                <form method="POST" action="{{ url_for('_food') }}">
+                  <input type="hidden" name="delete" value="{{ food_element['name'] }}" class="form-control">
+                  <button type="submit"  class="btn btn-danger">Remove</button>
+                </form>
               </ul>
               <br>
               {% endfor %}
