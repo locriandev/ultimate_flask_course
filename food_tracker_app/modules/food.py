@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 from modules import database
 
 
@@ -10,7 +10,6 @@ def init(app: Flask):
                 handle_new_food(request.form)
             else:
                 delete_food(request.form)
-            return redirect(url_for('_food'))
 
         return render_template('add_food.html', food=get_food())
 

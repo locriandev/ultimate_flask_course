@@ -37,7 +37,7 @@
           <form method="POST" action="/">
             <div class="form-group">
               <label for="new-day">New Day</label>
-              <input type="date" class="form-control" id="new-day">
+              <input type="date" name="date" class="form-control" id="new-day">
             </div>
 
             <button type="submit" class="btn btn-primary">Add</button>
@@ -45,9 +45,10 @@
 
           <div class="page-header"></div>
 
+          {% for date in dates %}
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">January 28, 2017</h3>
+              <h3 class="panel-title">{{ date.pretty_date }}</h3>
             </div>
             <div class="panel-body">
               <ul class="nav nav-pills" role="tablist">
@@ -56,9 +57,24 @@
                 <li><a>Fat: <span class="badge">50</span></a></li>
                 <li><a>Calories: <span class="badge">1650</span></a></li>
                 <li><a href="#" type="button" class="btn btn-link">View Detail</a></li>
+
+                <form method="POST" action="{{ url_for('_index') }}">
+                  <input type="hidden" name="delete" value="{{ date.date }}" class="form-control">
+                  <button type="submit"  class="btn btn-danger">Remove</button>
+                </form>
               </ul>
             </div>
+
+            <div class="whitespace"></div>
           </div>
+          {% endfor %}
+
+          {% if not dates %}
+          <div class="alert alert-warning" role="alert">
+            No dates have been added yet
+          </div>
+          {% endif %}
+
         </div>
       </div>
 
