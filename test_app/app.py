@@ -2,15 +2,7 @@
 
 from flask import Flask
 
-import forms
-import templates
-import request
-import session
-import inheritance
-import static
-import various
-import database
-
+from modules import database, templates, static, various, session, request, forms, inheritance
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'A!A%371z$IV*'

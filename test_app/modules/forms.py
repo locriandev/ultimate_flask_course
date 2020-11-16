@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify, url_for
 from werkzeug.utils import redirect
 
-from database import get_db
+from modules.database import get_db
 
 
 FORM_TEMPLATE = 'form.html'
