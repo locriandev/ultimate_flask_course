@@ -19,7 +19,9 @@ Food Tracker | Day Details
               <form method="POST" action="/">
                 <div class="form-group">
                   <select class="form-control">
-                    <option>1</option>
+                    {% for food in food_list %}
+                    <option>{{ food.name }}</option>
+                    {% endfor %}
                   </select>
                 </div>
 
