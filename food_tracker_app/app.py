@@ -1,16 +1,12 @@
 from flask import Flask, render_template
 
-from modules import database, food
+from modules import database, food, index
 
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = 'JtiPWt7jC3K3'
 food.init(APP)
 database.init(APP)
-
-
-@APP.route('/')
-def index():
-    return render_template('home.html')
+index.init(APP)
 
 
 @APP.route('/view')
