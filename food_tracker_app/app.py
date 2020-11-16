@@ -1,17 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask
 
-from modules import database, food, index
+from modules import database, food, index, details
 
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = 'JtiPWt7jC3K3'
-food.init(APP)
 database.init(APP)
+food.init(APP)
 index.init(APP)
-
-
-@APP.route('/view')
-def view():
-    return render_template('day.html')
+details.init(APP)
 
 
 if __name__ == '__main__':
