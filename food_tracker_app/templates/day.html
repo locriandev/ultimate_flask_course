@@ -11,18 +11,19 @@ Food Tracker | Day Details
         <div>
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">{{ date }}</h3>
+              <h3 class="panel-title">{{ pretty_date }}</h3>
             </div>
 
             <div class="panel-body">
 
-              <form method="POST" action="/">
+              <form method="POST" action="{{ url_for('add_food_date') }}">
                 <div class="form-group">
-                  <select class="form-control">
+                  <select name="food" class="form-control">
                     {% for food in food_list %}
                     <option>{{ food.name }}</option>
                     {% endfor %}
                   </select>
+                  <input type="hidden" name="date" value="{{ date }}" />
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add</button>

@@ -11,7 +11,8 @@ def init(app: Flask):
 
         return render_template(
             'day.html',
-            date=dates.pretty_date(db_date),
+            date=db_date,
+            pretty_date=dates.pretty_date(db_date),
             food_list=food.get_all_food(),
             daily_food=get_daily_food(db_date)
         )

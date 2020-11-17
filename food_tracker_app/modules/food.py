@@ -65,3 +65,10 @@ def get_food_from_food_id(food_id):
         f'select * from food where id={food_id}'
     )
     return cursor.fetchone()
+
+
+def get_food_id(food_name):
+    cursor = get_db().execute(
+        f'select id from food where name = "{food_name}"'
+    )
+    return cursor.fetchone()['id']
