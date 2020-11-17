@@ -48,7 +48,9 @@ def get_all_food():
 
 def delete_food(name):
     food_db = get_db()
+    food_id = get_food_id(name)
     food_db.execute(f'delete from food where name="{name}"')
+    food_db.execute(f'delete from food_date where food_id="{food_id}"')
     food_db.commit()
 
 
