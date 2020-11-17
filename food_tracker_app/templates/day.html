@@ -16,7 +16,7 @@ Food Tracker | Day Details
 
             <div class="panel-body">
 
-              <form method="POST" action="{{ url_for('add_food_date') }}">
+              <form method="POST" action="{{ url_for('_add_food_date') }}">
                 <div class="form-group">
                   <select name="food" class="form-control">
                     {% for food in food_list %}

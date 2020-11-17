@@ -6,7 +6,7 @@ from modules.database import get_db
 
 def init(app: Flask):
     @app.route('/addFoodDate', methods=['POST'])
-    def add_food_date():
+    def _add_food_date():
         food_id = get_food_id(request.form['food'])
         date_id = get_date_id(request.form['date'])
         get_db().execute(
