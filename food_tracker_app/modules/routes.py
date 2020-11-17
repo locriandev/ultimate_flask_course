@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request, url_for
 from werkzeug.utils import redirect
 
-from modules import dates
-from modules.database import get_db
-from modules.dates import date_exists, get_date_id
-from modules.details import get_daily_food
-from modules.food import handle_new_food, delete_food, get_all_food, get_food_id
+import modules.database
+from modules.database import get_db, get_daily_food, get_date_id, \
+    date_exists, handle_new_food, get_food_id, delete_food, get_all_food
 
 
 def init(app: Flask):
@@ -13,10 +11,10 @@ def init(app: Flask):
     def _index():
         if request.method == 'POST':
             if 'delete' in request.form:
-                dates.delete_date(request.form)
+                modules.database.delete_date(request.form)
             else:
-                dates.add_new_date(request.form['date'])
-        return render_template('home.html', dates=dates.get_dates())
+                modules.database.add_new_date(request.form['date'])
+        return render_template('home.html', dates=modules.database.get_dates())
 
     @app.route('/food', methods=['GET', 'POST'])
     def _food():
@@ -36,7 +34,7 @@ def init(app: Flask):
         return render_template(
             'day.html',
             date=db_date,
-            pretty_date=dates.pretty_date(db_date),
+            pretty_date=modules.database.pretty_date(db_date),
             food_list=get_all_food(),
             daily_food=get_daily_food(db_date)
         )
