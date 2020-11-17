@@ -1,21 +1,5 @@
-from flask import Flask, render_template
-from modules import dates, food
-from modules.dates import get_date_id, date_exists
-
-
-def init(app: Flask):
-    @app.route('/details/<int:db_date>')
-    def _details(db_date):
-        if not date_exists(db_date):
-            return '<h1>not found</h1>'
-
-        return render_template(
-            'day.html',
-            date=db_date,
-            pretty_date=dates.pretty_date(db_date),
-            food_list=food.get_all_food(),
-            daily_food=get_daily_food(db_date)
-        )
+from modules import food
+from modules.dates import get_date_id
 
 
 def get_daily_food(date):

@@ -1,17 +1,4 @@
-from flask import Flask, render_template, request
 from modules.database import get_db
-
-
-def init(app: Flask):
-    @app.route('/food', methods=['GET', 'POST'])
-    def _food():
-        if request.method == 'POST':
-            if 'add' in request.form:
-                handle_new_food(request.form)
-            else:
-                delete_food(request.form['delete'])
-
-        return render_template('add_food.html', food=get_all_food())
 
 
 def handle_new_food(form):

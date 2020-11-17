@@ -1,14 +1,11 @@
 from flask import Flask
 
-from modules import database, food, index, details, food_date
+from modules import routes, database
 
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = 'JtiPWt7jC3K3'
+routes.init(APP)
 database.init(APP)
-food.init(APP)
-index.init(APP)
-details.init(APP)
-food_date.init(APP)
 
 
 if __name__ == '__main__':
