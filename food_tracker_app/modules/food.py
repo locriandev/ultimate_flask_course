@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from modules import database
+from modules.database import get_db
 
 
 def init(app: Flask):
@@ -9,9 +9,9 @@ def init(app: Flask):
             if 'add' in request.form:
                 handle_new_food(request.form)
             else:
-                delete_food(request.form)
+                delete_food(request.form['delete'])
 
-        return render_template('add_food.html', food=get_food())
+        return render_template('add_food.html', food=get_all_food())
 
 
 def handle_new_food(form):
@@ -30,7 +30,7 @@ def compute_calories(food):
 
 
 def add_food_to_db(food):
-    food_db = database.get_db()
+    food_db = get_db()
     food_db.execute(
         'insert into food '
         '(name, protein, carbohydrates, fats, calories) '
@@ -41,14 +41,27 @@ def add_food_to_db(food):
     food_db.commit()
 
 
-def get_food():
-    food_db = database.get_db()
-    cursor = food_db.execute('select * from food')
+def get_all_food():
+    cursor = get_db().execute('select * from food')
     return cursor.fetchall()
 
 
-def delete_food(form):
-    name = form['delete']
-    food_db = database.get_db()
+def delete_food(name):
+    food_db = get_db()
     food_db.execute(f'delete from food where name="{name}"')
     food_db.commit()
+
+
+def get_food_for_date(date_id):
+    cursor = get_db().execute(
+        'select food_id from food_date '
+        f'where log_date_id = "{date_id}"'
+    )
+    return [element['food_id'] for element in cursor.fetchall()]
+
+
+def get_food_from_food_id(food_id):
+    cursor = get_db().execute(
+        f'select * from food where id={food_id}'
+    )
+    return cursor.fetchone()
