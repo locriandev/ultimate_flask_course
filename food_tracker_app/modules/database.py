@@ -39,8 +39,7 @@ def get_daily_food(date):
 
 
 def get_dates():
-    food_db = get_db()
-    cursor = food_db.execute('select * from log_date order by entry_date desc')
+    cursor = get_db().execute('select * from log_date order by entry_date desc')
     dates = cursor.fetchall()
     dates = [{'date': date['entry_date'],
               'pretty_date': pretty_date(date['entry_date'])} for date in dates]
